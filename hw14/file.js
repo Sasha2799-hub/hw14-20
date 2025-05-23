@@ -46,5 +46,15 @@ dots.forEach((dot, index) => {
             images[currentIndex].classList.add('img-hidden');
             images[index].classList.remove('img-hidden');
         }
+            if (index === 0) {
+            prevBtn.classList.add('btn-hide');
+            nextBtn.classList.remove('btn-hide');
+        } else if (index === images.length - 1) {
+            nextBtn.classList.add('btn-hide');
+            prevBtn.classList.remove('btn-hide');
+        } else {
+            prevBtn.classList.remove('btn-hide');
+            nextBtn.classList.remove('btn-hide');
+        }
     })
 })
