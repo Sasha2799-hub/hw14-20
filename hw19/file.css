@@ -1,0 +1,49 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container{
+    width: 450px;
+    height: 550px;
+    border-radius: 20px;
+    background-color: rgb(228, 218, 238);
+    display: flex;
+    flex-direction: column;
+     justify-content: center;
+    align-items: center;
+}
+.input,.btn-show,.btn-renew  {
+    border-radius: 9px;
+    border: none;
+    padding: 15px 10px;
+    font-size: 15px;
+}
+.btn {
+    cursor: pointer;
+    background-color: rgb(131, 12, 241)
+}
+.text {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+.title-text {
+    font-size: 30px;
+    padding-right: 20px;
+}
+.name-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+}
+.pad {
+    padding-bottom: 20px;
+
+}
