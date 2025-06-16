@@ -1,36 +1,57 @@
 $(document).ready(function () {
   const $input = $(".form__input.js--form__input");
-  const $btnAdd = $(".form__btn")
+  const $btnAdd = $(".form__btn");
   const $ul = $(".js--todos-wrapper");
 
   let tasks = JSON.parse(localStorage.getItem("task")) || [];
 
-function createLiTasks(task) {
-  const $li = $('<li>').addClass('todo-item');
+  function createLiTasks(task) {
+    const $li = $("<li>").addClass("todo-item");
 
-  const $inputCheckBox = $('<input>')
-    .attr('type', 'checkbox')
-    .attr('data-name', 'checkbox')
-    .prop('checked', task.done);
+    const $inputCheckBox = $("<input>")
+      .attr("type", "checkbox")
+      .attr("data-name", "checkbox")
+      .prop("checked", task.done);
 
-  const $span = $('<span>')
-    .addClass('todo-item__description')
-    .text(task.text);
+    const $span = $("<span>")
+      .addClass("todo-item__description")
+      .text(task.text);
 
-  if (task.done) {
-    $span.addClass('cross-line');
+    if (task.done) {
+      $span.addClass("cross-line");
+    }
+
+    const $btnDelete = $("<button>")
+      .addClass("todo-item__delete")
+      .attr("data-name", "delete")
+      .text("Видалити");
+
+    $li.append($inputCheckBox, $span, $btnDelete);
+    $ul.append($li);
+
+    $ul.on("click", function (event) {
+      const $target = $(event.target);
+      const targetBtnAttribute = $target.attr("data-name");
+
+      if (targetBtnAttribute === "delete") {
+        return;
+      }
+      if (
+        $target.closest(".todo-item").length &&
+        targetBtnAttribute !== "checkbox"
+      ) {
+        const taskText = $target
+          .closest(".todo-item")
+          .find(".todo-item__description")
+          .text();
+        $("#taskModal .modal-body").text(taskText);
+        const modal = new bootstrap.Modal(document.getElementById("taskModal"));
+        modal.show();
+      }
+    });
   }
 
-  const $btnDelete = $('<button>')
-    .addClass('todo-item__delete')
-    .attr('data-name', 'delete')
-    .text('Видалити');
-
-  $li.append($inputCheckBox, $span, $btnDelete);
-  $ul.append($li);
-}
-
-  tasks.forEach(task => createLiTasks(task));
+  tasks.forEach((task) => createLiTasks(task));
 
   $btnAdd.on("click", function (event) {
     event.preventDefault();
@@ -41,49 +62,46 @@ function createLiTasks(task) {
       createLiTasks(newTask);
       tasks.push(newTask);
       localStorage.setItem("task", JSON.stringify(tasks));
-      $input.val(""); 
+      $input.val("");
     }
   });
-  $ul.on('click', function (event) {
-  const targetBtnAttribute = $(event.target).attr('data-name');
-  const currentBtn = event.target;
+  $ul.on("click", function (event) {
+    const targetBtnAttribute = $(event.target).attr("data-name");
+    const currentBtn = event.target;
 
-  if (targetBtnAttribute === 'delete') {
-    const currentSpan = $(currentBtn)
-      .closest('.todo-item')
-      .find('.todo-item__description')[0];
+    if (targetBtnAttribute === "delete") {
+      const currentSpan = $(currentBtn)
+        .closest(".todo-item")
+        .find(".todo-item__description")[0];
 
-    $(currentBtn).closest('.todo-item').remove()
+      $(currentBtn).closest(".todo-item").remove();
 
-    for (let i = 0; i < tasks.length; i++) {
-      if (currentSpan.textContent === tasks[i].text) {
-        tasks.splice(i, 1)
-        localStorage.setItem('task', JSON.stringify(tasks));
-        break;
+      for (let i = 0; i < tasks.length; i++) {
+        if (currentSpan.textContent === tasks[i].text) {
+          tasks.splice(i, 1);
+          localStorage.setItem("task", JSON.stringify(tasks));
+          break;
+        }
+      }
+    } else if (targetBtnAttribute === "checkbox") {
+      const currentSpan = $(currentBtn)
+        .closest(".todo-item")
+        .find(".todo-item__description")[0];
+
+      const taskFind = tasks.find(function (task) {
+        return task.text === currentSpan.textContent;
+      });
+
+      if (taskFind) {
+        taskFind.done = currentBtn.checked;
+        localStorage.setItem("task", JSON.stringify(tasks));
+      }
+
+      if (currentBtn.checked) {
+        $(currentSpan).addClass("cross-line");
+      } else {
+        $(currentSpan).removeClass("cross-line");
       }
     }
-
-  } else if (targetBtnAttribute === 'checkbox') {
-    const currentSpan = $(currentBtn)
-      .closest('.todo-item')
-      .find('.todo-item__description')[0]
-
-    const taskFind = tasks.find(function (task) {
-      return task.text === currentSpan.textContent;
-    });
-
-    if (taskFind) {
-      taskFind.done = currentBtn.checked;
-      localStorage.setItem('task', JSON.stringify(tasks))
-    }
-
-    if (currentBtn.checked) {
-      $(currentSpan).addClass('cross-line');
-    } else {
-      $(currentSpan).removeClass('cross-line');
-    }
-  }
+  });
 });
-});
-
-
