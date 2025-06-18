@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "build": "babel src -d build"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.6",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.27.2",
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2"
+  }
+}
