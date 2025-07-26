@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.header {
+  padding: 20px;  
+}
+.box {
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+}
+.header-links {
+  list-style: none;
+  display: flex; 
+  justify-content: center;
+  gap: 30px; 
+  font-size: 18px; 
+  font-weight: 500;
+}
+
+.header-links a {
+  text-decoration: none;
+  color: #333; 
+}
+
+.header-links a:hover {
+  color: #ffffff; 
+}
+.todo_main_container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 12px;
+  font-family: sans-serif;
+}
+
+.input_container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input_container input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn_add {
+  padding: 10px 20px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.todo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;  
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.task {
+  font-size: 16px;
+  color: #333;
+}
+
+.delete_btn {
+  padding: 6px 12px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
