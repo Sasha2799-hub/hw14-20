@@ -2,6 +2,7 @@ import './App.css';
 import ToDoForm from './components/ToDoForm';
 import AddedTasks from './components/AddedTasks';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <h2>My ToDo List</h2>
       <ToDoForm />
       <AddedTasks />
+      <Footer />
     </div>
   )
 }

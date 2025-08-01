@@ -18,4 +18,4 @@ startBtn.addEventListener('click', () => {
       intervalId = null
     }
   }, 1000)
-});
+})
